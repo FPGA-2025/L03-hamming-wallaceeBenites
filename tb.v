@@ -28,23 +28,32 @@ corrige_hamming coh(
 integer i;
 
 initial begin
-  $readmemb("teste.txt", dados_arquivo); // le o arquivo de entrada
-  
-  $dumpfile("saida.vcd"); // gera waveform
-  $dumpvars(0, tb); // salva todas as variáveis
+  $readmemb("teste.txt", dados_arquivo); // le o arquivo de entrada e guarda em dados_arquivo
 
-  // Monitor apenas das entradas e saídas principais
+  $dumpfile("saida.vcd"); // gera um arquivo .vcd para visualização no gtkwave
+  $dumpvars(0, tb); // salva as variáveis do módulo tb_hamming
+
+  // $monitor("entrada=%b, h15=%b, n=%b, injeta_erro=%b, alterado=%b, saida=%b", entrada, h15, n, injeta_erro, alterado, saida);
   $monitor("entrada=%b, saida=%b", entrada, saida);
 
-  // Loop principal de teste
+initial begin
+
   for (i = 0; i < 5; i = i + 1) begin
-    entrada = dados_arquivo[i][15:5];  // 11 bits de dados
-    n = dados_arquivo[i][4:1];         // 4 bits de posição
-    injeta_erro = dados_arquivo[i][0]; // 1 bit de controle
-    #10; // Tempo suficiente para propagação
+
+    entrada = dados_arquivo[i][15:5];
+    n = dados_arquivo[i][4:1];
+    injeta_erro = dados_arquivo[i][0];
+    #10;
   end
-  
-  $finish; // Finaliza a simulação
+end
+
+  for (i = 0; i < 5; i = i + 1) begin
+    entrada = dados_arquivo[i][15:5];
+    n = dados_arquivo[i][4:1];
+    injeta_erro = dados_arquivo[i][0];
+    #1;
+  end
+
 end
 
 endmodule
