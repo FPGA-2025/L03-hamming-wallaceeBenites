@@ -36,17 +36,6 @@ initial begin
   // $monitor("entrada=%b, h15=%b, n=%b, injeta_erro=%b, alterado=%b, saida=%b", entrada, h15, n, injeta_erro, alterado, saida);
   $monitor("entrada=%b, saida=%b", entrada, saida);
 
-initial begin
-
-  for (i = 0; i < 5; i = i + 1) begin
-
-    entrada = dados_arquivo[i][15:5];
-    n = dados_arquivo[i][4:1];
-    injeta_erro = dados_arquivo[i][0];
-    #10;
-  end
-end
-
   for (i = 0; i < 5; i = i + 1) begin
     entrada = dados_arquivo[i][15:5];
     n = dados_arquivo[i][4:1];
