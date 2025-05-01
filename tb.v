@@ -9,8 +9,8 @@ wire [10:0] saida;
 reg [15:0] dados_arquivo [0:4];
 
 calcula_hamming cah(
-  .entrada(entrada),
-  .saida(h15)
+  .data_in(entrada),
+  .data_out(h15)
 );
 
 injetor inj(
@@ -28,26 +28,21 @@ corrige_hamming coh(
 integer i;
 
 initial begin
-  $readmemb("teste.txt", dados_arquivo);
+  $readmemb("teste.txt", dados_arquivo); // le o arquivo de entrada e guarda em dados_arquivo
 
-  $dumpfile("saida.vcd");
-  $dumpvars(0, tb);
+  $dumpfile("saida.vcd"); // gera um arquivo .vcd para visualização no gtkwave
+  $dumpvars(0, tb); // salva as variáveis do módulo tb_hamming
 
-  $display("Teste de código Hamming com injeção e correção de erro:");
-  $monitor("entrada=%b, h15=%b, n=%d, erro=%b, alterado=%b, saida=%b",
-           entrada, h15, n, injeta_erro, alterado, saida);
+  // $monitor("entrada=%b, h15=%b, n=%b, injeta_erro=%b, alterado=%b, saida=%b", entrada, h15, n, injeta_erro, alterado, saida);
+  $monitor("entrada=%b, saida=%b", entrada, saida);
 
   for (i = 0; i < 5; i = i + 1) begin
     entrada = dados_arquivo[i][15:5];
     n = dados_arquivo[i][4:1];
     injeta_erro = dados_arquivo[i][0];
-    #10;
+    #1;
   end
-end
 
-initial begin
-  #100;
-  $finish;
 end
 
 endmodule
