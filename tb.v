@@ -9,8 +9,8 @@ wire [10:0] saida;
 reg [15:0] dados_arquivo [0:4];
 
 calcula_hamming cah(
-  .data_in(entrada),
-  .data_out(h15)
+  .entrada(entrada),
+  .saida(h15)
 );
 
 injetor inj(
