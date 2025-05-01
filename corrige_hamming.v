@@ -17,7 +17,10 @@ module corrige_hamming (
 
   wire [3:0] error_pos = {s3, s2, s1, s0};
 
-  wire [14:0] corrected = entrada ^ (15'b1 << (error_pos-1));
+  // Correção aplicada somente se error_pos for diferente de 0
+  wire [14:0] corrected_input = (error_pos != 0) 
+    ? (entrada ^ (15'b1 << (error_pos - 1)))
+    : entrada;
 
   always @(*) begin
     saida = {
