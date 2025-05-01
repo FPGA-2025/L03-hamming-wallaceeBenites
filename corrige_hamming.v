@@ -24,17 +24,17 @@ module corrige_hamming (
 
   always @(*) begin
     saida = {
-      corrected[14], // d10
-      corrected[13], // d9
-      corrected[12], // d8
-      corrected[11], // d7
-      corrected[10], // d6
-      corrected[9],  // d5
-      corrected[8],  // d4
-      corrected[6],  // d3
-      corrected[5],  // d2
-      corrected[4],  // d1
-      corrected[2]   // d0
+      corrected_input[14], // d10
+      corrected_input[13], // d9
+      corrected_input[12], // d8
+      corrected_input[11], // d7
+      corrected_input[10], // d6
+      corrected_input[9],  // d5
+      corrected_input[8],  // d4
+      corrected_input[6],  // d3
+      corrected_input[5],  // d2
+      corrected_input[4],  // d1
+      corrected_input[2]   // d0
     };
   end
 
